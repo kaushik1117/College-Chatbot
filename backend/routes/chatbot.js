@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 router.use(bodyParser.json());
+require('dotenv').config();
+
 
 // API Route for handling chatbot responses
 router.post('/api/chatbot/response', async (req, res) => {
@@ -15,7 +17,7 @@ router.post('/api/chatbot/response', async (req, res) => {
 
     try {
         // Initialize the Google Generative AI with your API key
-        const genAI = new GoogleGenerativeAI('AIzaSyCUkLNSwx-145fQ0S5BDou2AwJYjvPRW5g');
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
 
         // Fetch the generative model for Gemini Pro
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
